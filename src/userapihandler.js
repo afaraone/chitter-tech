@@ -6,9 +6,9 @@ class UserApiHandler extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            userId: "",
+            userDetails: {},
             session: "",
-            status: 'loading'
+            status: 'loggedOut'
         }
         this.postSession = this.postSession.bind(this)
     }
@@ -20,18 +20,31 @@ class UserApiHandler extends Component {
             data: data,
             headers: {"content-type": "application/json"}
         })
-        .then((res) => this.setState({
-            userId: res.data.user_id, session: res.data.session_key, status: 'loggedIn'
+        .then(res => this.setState({
+            userDetails: {userId: res.data.user_id, handle: handle}, session: res.data.session_key, status: 'loggedIn'
         }))
         .catch(() => this.setState({status: 'error'}))
     }
 
     deleteSession() {
         this.setState({
-            userId: "",
+            userDetails: {},
             session: "",
-            status: 'loading'
+            status: 'loggedOut'
         })
+    }
+
+    postUser(handle, password) {
+        let data = {"session": {handle: handle, password: password}}
+        axios.post({
+            url: 'https://chitter-backend-api.herokuapp.com/users',
+            data: data,
+            headers: {"content-type": "application/json"}
+        })
+        .then(() => {
+            this.postSession(handle, password)
+        })
+        .catch(() => this.setState({status: 'error'}))
     }
     
     render() {

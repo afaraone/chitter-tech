@@ -18,7 +18,7 @@ describe('UserApiHandler', () => {
             axios.post.mockImplementation(() => Promise.resolve({data: data}))
             wrapper.instance().postSession("testHandle", "testPassword")
             setTimeout(() => {
-                expect(wrapper.state('userId')).toEqual(1)
+                expect(wrapper.state('userDetails')).toEqual({userId: 1, handle: "testHandle"})
                 expect(wrapper.state('session')).toEqual('testSession')
                 expect(wrapper.state('status')).toEqual('loggedIn')
                 done()                    
@@ -38,9 +38,23 @@ describe('UserApiHandler', () => {
     describe('deleteSession', () => {
         it('resets state after logout', () => {
             wrapper.instance().deleteSession()
-            expect(wrapper.state('userId')).toEqual('')
+            expect(wrapper.state('userDetails')).toEqual({})
             expect(wrapper.state('session')).toEqual('')
-            expect(wrapper.state('status')).toEqual('loading')
+            expect(wrapper.state('status')).toEqual('loggedOut')
+        })
+    })
+
+    describe('postUser', () => {
+        it('returns id and session', done => {
+            let sessionRes = {user_id: 1, session_key: "testSession"}
+            axios.post.mockImplementation(() => Promise.resolve({data: sessionRes}))
+            wrapper.instance().postUser("testHandle", "testPassword")
+            setTimeout(() => {
+                expect(wrapper.state('userDetails')).toEqual({userId: 1, handle: "testHandle"})
+                expect(wrapper.state('session')).toEqual('testSession')
+                expect(wrapper.state('status')).toEqual('loggedIn')
+                done()                    
+            })
         })
     })
 
