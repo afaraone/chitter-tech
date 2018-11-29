@@ -9,11 +9,24 @@ jest.mock('axios')
 describe('UserApiHandler', () => {
     let wrapper
     beforeEach(() => {
-        wrapper = shallow(<UserApiHandler />)
+        wrapper = mount(<UserApiHandler />)
+    })
+
+    describe('loginButton', () => {
+      let loginButton = <button id='login-button'>Login / Register</button>
+      it('shows register/login button', () => {
+        expect(wrapper.containsMatchingElement(loginButton)).toBe(true)
+      })
+
+      it('shows forms after button click', () => {
+        wrapper.find('#login-button').simulate('click')
+        expect(wrapper.containsMatchingElement(loginButton)).toBe(false)
+        expect(wrapper.containsMatchingElement(LoginForm)).toBe(true)
+      })
     })
 
     describe('postSession', () => {
-        it('sets state to session and handle after successful login', done => {
+        it('sets state to session and handle after succesful call', done => {
             let data = {user_id: 1, session_key: "testSession"}
             axios.post.mockImplementation(() => Promise.resolve({data: data}))
             wrapper.instance().postSession("testHandle", "testPassword")
@@ -21,7 +34,7 @@ describe('UserApiHandler', () => {
                 expect(wrapper.state('userDetails')).toEqual({userId: 1, handle: "testHandle"})
                 expect(wrapper.state('session')).toEqual('testSession')
                 expect(wrapper.state('status')).toEqual('loggedIn')
-                done()                    
+                done()
             })
         })
 
@@ -30,13 +43,13 @@ describe('UserApiHandler', () => {
             wrapper.instance().postSession("testHandle", "testPassword")
             setTimeout(() => {
                 expect(wrapper.state('status')).toEqual('error')
-                done()                    
+                done()
             })
         })
     })
 
     describe('deleteSession', () => {
-        it('resets state after logout', () => {
+        it('resets state', () => {
             wrapper.instance().deleteSession()
             expect(wrapper.state('userDetails')).toEqual({})
             expect(wrapper.state('session')).toEqual('')
@@ -45,7 +58,7 @@ describe('UserApiHandler', () => {
     })
 
     describe('postUser', () => {
-        it('returns id and session', done => {
+        it('returns id and session after successful call', done => {
             let sessionRes = {user_id: 1, session_key: "testSession"}
             axios.post.mockImplementation(() => Promise.resolve({data: sessionRes}))
             wrapper.instance().postUser("testHandle", "testPassword")
@@ -53,7 +66,7 @@ describe('UserApiHandler', () => {
                 expect(wrapper.state('userDetails')).toEqual({userId: 1, handle: "testHandle"})
                 expect(wrapper.state('session')).toEqual('testSession')
                 expect(wrapper.state('status')).toEqual('loggedIn')
-                done()                    
+                done()
             })
         })
     })
