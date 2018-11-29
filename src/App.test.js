@@ -4,12 +4,12 @@ import App from './App';
 import UserApiHandler from './userapihandler';
 
 describe('App', () => {
-  let wrapper
+  let wrapper;
   beforeEach(() => {
-    wrapper = mount(<App />)
-  })
+    wrapper = mount(<App />);
+  });
 
   it('renders userApiHandler', () => {
-    expect(wrapper.containsMatchingElement(UserApiHandler)).toBeTruthy()
-  })
-})
+    expect(wrapper.containsMatchingElement(UserApiHandler)).toBeTruthy();
+  });
+});
