@@ -5,6 +5,7 @@ node_js:
 cache: npm
 
 before_script:
+  - export TZ=Europe/London
   - npm install
 
 script:
