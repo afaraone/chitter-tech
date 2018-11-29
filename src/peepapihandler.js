@@ -7,17 +7,22 @@ class PeepApiHandler extends Component {
     this.state = { peeps: [], status: 'loading' };
   };
 
+  componentDidMount() {
+    this.getPeeps();
+  };
+
   getPeeps() {
     axios.get("https://chitter-backend-api.herokuapp.com/peeps")
     .then(res => this.setState({peeps: res.data, status: 'loaded' }))
-    .catch(err => console.log(err));
+    .catch(err => this.setState({ status: err}));
   };
+
   render() {
     return(
       <div className='peep-list'>
       </div>
     );
-  }
+  };
 };
 
 export default PeepApiHandler;
