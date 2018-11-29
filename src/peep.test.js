@@ -25,7 +25,7 @@ describe('Peep', () => {
 
   it('renders formatted date', () => {
     console.log(wrapper.debug())
-    let date = <h2 className='peep-date'>14:21 23/06/2018</h2>
+    let date = <h2 className='peep-date'>14:21 23/6/2018</h2>
     expect(wrapper.contains(date)).toEqual(true)
   })
 
