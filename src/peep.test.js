@@ -4,7 +4,7 @@ import Peep from './peep'
 
 let peepData = {"id": 3, "body": "my first peep :)", "created_at": "2018-06-23T13:21:23.317Z",
 "updated_at": "2018-06-23T13:21:23.317Z", "user": {"id": 1, "handle": "kay"},
-"likes": [{"user": {"id": 1, "handle": "kay"}}]}
+"likes": [{"user": {"id": 1, "handle": "kay"}}, {"user": {"id": 2, "handle": "james"}}]}
 
 describe('Peep', () => {
   let wrapper
@@ -25,7 +25,11 @@ describe('Peep', () => {
 
   it('renders formatted date', () => {
     let date = <h2 className='peep-date'>14:21 23/06/2018</h2>
-    console.log(wrapper.debug())
     expect(wrapper.contains(date)).toEqual(true)
+  })
+
+  it('renders a like count', () => {
+    let likes = <h2 className='peep-likes'>2 Likes</h2>
+    expect(wrapper.contains(likes)).toEqual(true)
   })
 })
