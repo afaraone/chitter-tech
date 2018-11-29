@@ -9,14 +9,10 @@ jest.mock('axios')
 describe('UserApiHandler', () => {
     let wrapper
     beforeEach(() => {
-        wrapper = mount(<UserApiHandler />)
+        wrapper = shallow(<UserApiHandler />)
     })
 
-    it('renders a login form', () => {
-        expect(wrapper.containsMatchingElement(LoginForm)).toEqual(true)
-    })
-
-    describe('logging in', () => {
+    describe('postSession', () => {
         it('sets state to session and handle after successful login', done => {
             let data = {user_id: 1, session_key: "testSession"}
             axios.post.mockImplementation(() => Promise.resolve({data: data}))
@@ -24,7 +20,7 @@ describe('UserApiHandler', () => {
             setTimeout(() => {
                 expect(wrapper.state('userId')).toEqual(1)
                 expect(wrapper.state('session')).toEqual('testSession')
-                expect(wrapper.state('loggedIn')).toEqual(true)
+                expect(wrapper.state('status')).toEqual('loggedIn')
                 done()                    
             })
         })
@@ -38,4 +34,15 @@ describe('UserApiHandler', () => {
             })
         })
     })
+
+    describe('deleteSession', () => {
+        it('resets state after logout', () => {
+            wrapper.instance().deleteSession()
+            expect(wrapper.state('userId')).toEqual('')
+            expect(wrapper.state('session')).toEqual('')
+            expect(wrapper.state('status')).toEqual('loading')
+        })
+    })
+
+
 })

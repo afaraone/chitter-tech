@@ -8,7 +8,6 @@ class UserApiHandler extends Component {
         this.state = {
             userId: "",
             session: "",
-            loggedIn: false,
             status: 'loading'
         }
         this.postSession = this.postSession.bind(this)
@@ -22,9 +21,17 @@ class UserApiHandler extends Component {
             headers: {"content-type": "application/json"}
         })
         .then((res) => this.setState({
-            userId: res.data.user_id, session: res.data.session_key, status: 'done', loggedIn: true
+            userId: res.data.user_id, session: res.data.session_key, status: 'loggedIn'
         }))
         .catch(() => this.setState({status: 'error'}))
+    }
+
+    deleteSession() {
+        this.setState({
+            userId: "",
+            session: "",
+            status: 'loading'
+        })
     }
     
     render() {
