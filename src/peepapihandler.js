@@ -20,9 +20,9 @@ class PeepApiHandler extends Component {
 
   render() {
     const isLoaded = this.state.status === 'loaded'
-    const peeps = this.state.peeps.map(peep => <Peep />)
+    const peeps = this.state.peeps.map(peep => <Peep data={peep} key={peep.id}/>)
     return(
-      <div className='peep-list'>
+      <div className='peep-timeline'>
         {isLoaded && peeps}
       </div>
     );
