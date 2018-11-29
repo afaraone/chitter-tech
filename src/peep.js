@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 class Peep extends Component {
   format_date(date) {
     let d = new Date(date)
-    return d.getHours() + ":" + d.getMinutes() + " " + d.toLocaleDateString()
+    return d.getHours() + ":" + d.getMinutes() + " " + d.toLocaleDateString('en-GB')
   }
 
   render() {
