@@ -1,9 +1,15 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { shallow, mount } from 'enzyme';
 import App from './App';
+import UserApiHandler from './userapihandler';
 
-it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<App />, div);
-  ReactDOM.unmountComponentAtNode(div);
-});
+describe('App', () => {
+  let wrapper
+  beforeEach(() => {
+    wrapper = mount(<App />)
+  })
+
+  it('renders userApiHandler', () => {
+    expect(wrapper.containsMatchingElement(UserApiHandler)).toBeTruthy()
+  })
+})

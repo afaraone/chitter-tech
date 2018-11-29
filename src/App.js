@@ -5,11 +5,7 @@ import UserApiHandler from './userapihandler';
 
 class App extends Component {
   render() {
-    return (
-      <div className="App">
-        <UserApiHandler />
-      </div>
-    );
+    return (<UserApiHandler />);
   }
 }
 
