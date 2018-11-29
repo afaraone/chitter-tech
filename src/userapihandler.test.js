@@ -69,5 +69,14 @@ describe('UserApiHandler', () => {
         done();
       });
     });
+
+    it('sets state to error', done => {
+      axios.post.mockImplementation(() => Promise.reject());
+      wrapper.instance().postUser("testHandle", "testPassword");
+      setTimeout(() => {
+        expect(wrapper.state('status')).toEqual('error');
+        done();
+      });
+    })
   });
 });

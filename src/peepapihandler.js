@@ -9,7 +9,7 @@ class PeepApiHandler extends Component {
   };
 
   componentDidMount() {
-    this.getPeeps()
+    this.getPeeps();
   };
 
   getPeeps() {
