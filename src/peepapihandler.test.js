@@ -1,6 +1,7 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
 import PeepApiHandler from './peepapihandler';
+import Peep from './peep'
 import axios from 'axios';
 
 jest.mock('axios');
@@ -29,9 +30,16 @@ describe('PeepApiHandler', () => {
       axios.get.mockImplementation(() => Promise.reject('error'));
       wrapper = shallow(<PeepApiHandler/>);
       setTimeout(() => {
-        expect(wrapper.state('status')).toEqual('error')
-        done()
-      })
-    })
+        expect(wrapper.state('status')).toEqual('error');
+        done();
+      });
+    });
+
+    it('renders Peeps', done => {
+      setTimeout(() => {
+        expect(wrapper.find(Peep)).toHaveLength(peeps.length);
+        done();
+      });
+    });
   });
 });

@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import Peep from './peep'
 import axios from 'axios';
 
 class PeepApiHandler extends Component {
@@ -8,7 +9,7 @@ class PeepApiHandler extends Component {
   };
 
   componentDidMount() {
-    this.getPeeps();
+    this.getPeeps()
   };
 
   getPeeps() {
@@ -18,8 +19,11 @@ class PeepApiHandler extends Component {
   };
 
   render() {
+    const isLoaded = this.state.status === 'loaded'
+    const peeps = this.state.peeps.map(peep => <Peep />)
     return(
       <div className='peep-list'>
+        {isLoaded && peeps}
       </div>
     );
   };

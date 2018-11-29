@@ -9,7 +9,7 @@ jest.mock('axios');
 describe('UserApiHandler', () => {
   let wrapper;
   beforeEach(() => {
-      wrapper = mount(<UserApiHandler />);
+      wrapper = shallow(<UserApiHandler />);
   });
 
   describe('loginButton', () => {
@@ -21,7 +21,7 @@ describe('UserApiHandler', () => {
     it('shows forms after button click', () => {
       wrapper.find('#login-button').simulate('click')
       expect(wrapper.containsMatchingElement(loginButton)).toBe(false);
-      expect(wrapper.containsMatchingElement(LoginForm)).toBe(true);
+      expect(wrapper.containsMatchingElement(<LoginForm/>)).toBe(true);
     });
   });
 
