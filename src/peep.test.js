@@ -22,4 +22,10 @@ describe('Peep', () => {
     let body = <h2 className='peep-body'>my first peep :)</h2>
     expect(wrapper.contains(body)).toEqual(true)
   })
+
+  it('renders formatted date', () => {
+    let date = <h2 className='peep-date'>14:21 23/06/2018</h2>
+    console.log(wrapper.debug())
+    expect(wrapper.contains(date)).toEqual(true)
+  })
 })
