@@ -3,7 +3,7 @@ import React, {Component} from 'react'
 class LoginForm extends Component {
 	constructor(props) {
 		super(props);
-		this.state = { handle: '' };
+		this.state = { handle: '', password: '' };
 		this.updateHandle = this.updateHandle.bind(this);
 		this.updatePassword = this.updatePassword.bind(this);
 	};

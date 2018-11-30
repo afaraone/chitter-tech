@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
-import PeepApiHandler from './peepapihandler';
-import Peep from './peep'
+import PeepApiHandler from '../../peepapihandler';
+import Peep from '../../peep'
 import axios from 'axios';
 
 jest.mock('axios');

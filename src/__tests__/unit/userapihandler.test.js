@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
-import UserApiHandler from './userapihandler';
-import LoginForm from './loginform';
+import UserApiHandler from '../../userapihandler';
+import LoginForm from '../../loginform';
 import axios from 'axios';
 
 jest.mock('axios');
