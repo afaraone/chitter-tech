@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
-import LoginForm from './loginform';
+import LoginForm from '../../loginform';
 
 let postSession = jest.fn();
 let postUser = jest.fn();
