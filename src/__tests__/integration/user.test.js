@@ -33,4 +33,26 @@ describe('Users', () => {
       done()
     })
   })
+
+  it('user details and session saved after registration', done => {
+    wrapper.find('#register-submit').simulate('click')
+    setTimeout(() => {
+      expect(wrapper.state('userDetails')).toEqual({userId: 1, handle: "handle"})
+      expect(wrapper.state('session')).toEqual('testSession')
+      expect(wrapper.state('status')).toEqual('loggedIn')
+      done()
+    })
+  })
+
+  it('logout clears session and user details', done => {
+    wrapper.find('#register-submit').simulate('click')
+    setTimeout(() => {
+      wrapper.update()
+      wrapper.find('#logout-button').simulate('click')
+      expect(wrapper.state('userDetails')).toEqual({})
+      expect(wrapper.state('session')).toEqual('')
+      expect(wrapper.state('status')).toEqual('loggedOut')
+      done()
+    })
+  })
 })
