@@ -61,6 +61,15 @@ describe('PeepApiHandler', () => {
         done();
       });
     });
+
+    it('sets status to error', done => {
+      axios.post.mockImplementation(() => Promise.reject('error'));
+      wrapper.instance().postPeep('hello');
+      setTimeout(() => {
+        expect(wrapper.state('status')).toEqual('error');
+        done();
+      });
+    });
   });
 
   describe('on mount', () => {

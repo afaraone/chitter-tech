@@ -30,7 +30,7 @@ class PeepApiHandler extends Component {
       }
     })
     .then(() => this.getPeeps())
-    .catch(() => console.log('error'))
+    .catch(err => this.setState({ status: err}));
   }
 
   render() {
