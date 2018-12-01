@@ -64,7 +64,7 @@ class UserApiHandler extends Component {
             {showButton && !loggedIn && <button id='login-button' onClick={this.showButton}>Login / Register</button>}
             {!showButton && !loggedIn && <LoginForm postSession={this.postSession} postUser={this.postUser}/>}
             {loggedIn && <button id='logout-button' onClick={this.deleteSession}>Logout</button>}
-            <PeepApiHandler userDetails={this.state.userDetails} session={this.state.session}/>
+            <PeepApiHandler userDetails={this.state.userDetails} session={this.state.session} loggedIn={loggedIn}/>
             </>
         );
     };
