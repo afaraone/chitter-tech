@@ -34,9 +34,9 @@ class PeepApiHandler extends Component {
   render() {
     const isLoaded = this.state.status === 'loaded';
     return(
-      <div className='peep-timeline'>
+      <>
         {isLoaded && <PeepContainer peeps={this.state.peeps}/>}
-      </div>
+      </>
     );
   };
 };
