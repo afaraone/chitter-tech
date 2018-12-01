@@ -1,45 +1,91 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import PeepApiHandler from '../../peepapihandler';
-import Peep from '../../peep'
+import PeepContainer from '../../peepcontainer';
+import PeepForm from '../../peepform';
 import axios from 'axios';
+import {mockPeeps} from '../../mocks/mockObjects';
 
+let userDetails = {userId: 1}
 jest.mock('axios');
-let peeps = [{"id": 3, "body": "my first peep :)", "created_at": "2018-06-23T13:21:23.317Z",
-"updated_at": "2018-06-23T13:21:23.317Z", "user": {"id": 1, "handle": "kay"},
-"likes": [{"user": {"id": 1, "handle": "kay"}}]}];
 
 describe('PeepApiHandler', () => {
   let wrapper;
 
   beforeEach(() => {
-    axios.get.mockImplementation(() => Promise.resolve({data: peeps}));
-    wrapper = shallow(<PeepApiHandler/>);
+    wrapper = shallow(<PeepApiHandler userDetails={userDetails} session={"testSession"}/>, {disableLifecycleMethods: true});
   });
 
-  describe('on mount', () => {
+  describe('getPeeps', () => {
+    beforeEach(() => {
+      axios.get.mockImplementation(() => Promise.resolve({data: mockPeeps}));
+      wrapper.instance().getPeeps();
+    });
+
     it('saves peeps to list on success', done => {
       setTimeout(() => {
-        expect(wrapper.state('peeps')).toEqual(peeps);
+        expect(wrapper.state('peeps')).toEqual(mockPeeps);
         expect(wrapper.state('status')).toEqual('loaded');
+        done();
+      });
+    });
+
+    it('renders PeepContainer with props set to peeps', done => {
+      setTimeout(() => {
+        expect(wrapper.containsMatchingElement(<PeepContainer/>)).toBe(true);
+        expect(wrapper.find(PeepContainer).props().peeps).toEqual(mockPeeps);
         done();
       });
     });
 
     it('returns error if unable to load peeps', done => {
       axios.get.mockImplementation(() => Promise.reject('error'));
-      wrapper = shallow(<PeepApiHandler/>);
+      wrapper.instance().getPeeps();
+
       setTimeout(() => {
         expect(wrapper.state('status')).toEqual('error');
         done();
       });
     });
+  });
 
-    it('renders Peeps', done => {
+  describe('postPeep', () => {
+    it('makes makes post req and calls getPeeps', done => {
+      let postReq = axios.post.mockImplementation(() => Promise.resolve());
+      let spyGetPeeps = jest.spyOn(PeepApiHandler.prototype, 'getPeeps');
+
+      wrapper.instance().postPeep('hello');
       setTimeout(() => {
-        expect(wrapper.find(Peep)).toHaveLength(peeps.length);
+        expect(postReq).toHaveBeenCalled();
+        expect(spyGetPeeps).toHaveBeenCalled();
         done();
       });
     });
+
+    it('sets status to error', done => {
+      axios.post.mockImplementation(() => Promise.reject('error'));
+      wrapper.instance().postPeep('hello');
+      setTimeout(() => {
+        expect(wrapper.state('status')).toEqual('error');
+        done();
+      });
+    });
+  });
+
+  describe('on mount', () => {
+    it('calls getPeeps', done => {
+      let spyGetPeeps = jest.spyOn(PeepApiHandler.prototype, 'getPeeps');
+
+      wrapper = shallow(<PeepApiHandler/>);
+      setTimeout(() => {
+        expect(spyGetPeeps).toHaveBeenCalled();
+        done();
+      });
+    });
+  });
+
+  it('renders PeepForm if logged in', () => {
+    wrapper = shallow(<PeepApiHandler loggedIn={true}/>);
+    expect(wrapper.containsMatchingElement(<PeepForm/>));
   });
 });

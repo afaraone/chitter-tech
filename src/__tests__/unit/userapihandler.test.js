@@ -16,6 +16,7 @@ describe('UserApiHandler', () => {
     let loginButton = <button id='login-button'>Login / Register</button>;
     it('shows register/login button', () => {
       expect(wrapper.containsMatchingElement(loginButton)).toBe(true);
+      expect(wrapper.containsMatchingElement(<LoginForm/>)).toBe(false);
     });
 
     it('shows forms after button click', () => {
@@ -27,8 +28,10 @@ describe('UserApiHandler', () => {
 
   describe('postSession', () => {
     it('sets state to session and handle after succesful call', done => {
+      // setup succesful api req
       let data = {user_id: 1, session_key: "testSession"};
       axios.post.mockImplementation(() => Promise.resolve({data: data}));
+
       wrapper.instance().postSession("testHandle", "testPassword");
       setTimeout(() => {
         expect(wrapper.state('userDetails')).toEqual({userId: 1, handle: "testHandle"});
@@ -39,7 +42,9 @@ describe('UserApiHandler', () => {
     });
 
     it('sets state to error if not succesful', done => {
+      // setup unsuccesful api req
       axios.post.mockImplementation(() => Promise.reject());
+
       wrapper.instance().postSession("testHandle", "testPassword");
       setTimeout(() => {
         expect(wrapper.state('status')).toEqual('error');
@@ -59,8 +64,10 @@ describe('UserApiHandler', () => {
 
   describe('postUser', () => {
     it('returns id and session after successful call', done => {
+      // setup succesful api req
       let sessionRes = {user_id: 1, session_key: "testSession"};
       axios.post.mockImplementation(() => Promise.resolve({data: sessionRes}));
+
       wrapper.instance().postUser("testHandle", "testPassword");
       setTimeout(() => {
         expect(wrapper.state('userDetails')).toEqual({userId: 1, handle: "testHandle"});
@@ -71,7 +78,9 @@ describe('UserApiHandler', () => {
     });
 
     it('sets state to error', done => {
+      // setup unsuccesful api req
       axios.post.mockImplementation(() => Promise.reject());
+
       wrapper.instance().postUser("testHandle", "testPassword");
       setTimeout(() => {
         expect(wrapper.state('status')).toEqual('error');
