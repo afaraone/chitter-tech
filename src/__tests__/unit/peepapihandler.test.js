@@ -1,9 +1,9 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import PeepApiHandler from '../../peepapihandler';
-import Peep from '../../peep';
+import PeepContainer from '../../peepcontainer';
 import axios from 'axios';
-import {mockPeeps} from '../../mocks/mockObjects'
+import {mockPeeps} from '../../mocks/mockObjects';
 
 let userDetails = {userId: 1}
 jest.mock('axios');
@@ -29,9 +29,10 @@ describe('PeepApiHandler', () => {
       });
     });
 
-    it('renders Peeps', done => {
+    it('renders PeepContainer with props set to peeps', done => {
       setTimeout(() => {
-        expect(wrapper.find(Peep)).toHaveLength(mockPeeps.length);
+        expect(wrapper.containsMatchingElement(<PeepContainer/>)).toBe(true);
+        expect(wrapper.find(PeepContainer).props().peeps).toEqual(mockPeeps);
         done();
       });
     });
