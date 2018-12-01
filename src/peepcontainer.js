@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import Peep from './peep'
-import axios from 'axios';
 
 class PeepContainer extends Component {
   render() {
