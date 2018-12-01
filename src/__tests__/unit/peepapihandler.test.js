@@ -2,6 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import PeepApiHandler from '../../peepapihandler';
 import PeepContainer from '../../peepcontainer';
+import PeepForm from '../../peepform';
 import axios from 'axios';
 import {mockPeeps} from '../../mocks/mockObjects';
 
@@ -72,5 +73,10 @@ describe('PeepApiHandler', () => {
         done();
       });
     });
+  });
+
+  it('renders PeepForm if logged in', () => {
+    wrapper = shallow(<PeepApiHandler loggedIn={true}/>);
+    expect(wrapper.containsMatchingElement(<PeepForm/>));
   });
 });

@@ -1,11 +1,13 @@
 import React, {Component} from 'react';
 import PeepContainer from './peepcontainer';
+import PeepForm from './peepform';
 import axios from 'axios';
 
 class PeepApiHandler extends Component {
   constructor(props) {
     super(props);
     this.state = { peeps: [], status: 'loading' };
+    this.postPeep = this.postPeep.bind(this)
   };
 
   componentDidMount() {
@@ -32,9 +34,11 @@ class PeepApiHandler extends Component {
   }
 
   render() {
+    const isLoggedIn = this.props.loggedIn
     const isLoaded = this.state.status === 'loaded';
     return(
       <>
+        {isLoggedIn && <PeepForm postPeep={this.postPeep}/>}
         {isLoaded && <PeepContainer peeps={this.state.peeps}/>}
       </>
     );
