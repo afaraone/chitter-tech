@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.com/afaraone/chitter-tech.svg?branch=master)](https://travis-ci.com/afaraone/chitter-tech)
-[![Coverage Status](https://coveralls.io/repos/github/afaraone/chitter-tech/badge.svg?branch=peeplist)](https://coveralls.io/github/afaraone/chitter-tech?branch=peeplist)
+[![Coverage Status](https://coveralls.io/repos/github/afaraone/chitter-tech/badge.svg?branch=master)](https://coveralls.io/github/afaraone/chitter-tech?branch=master)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
