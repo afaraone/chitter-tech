@@ -18,12 +18,24 @@ class PeepApiHandler extends Component {
     .catch(err => this.setState({ status: err}));
   };
 
+  postPeep(body) {
+    let data = {"user_id": this.props.userDetails.userId, "body": body}
+    axios.post("https://chitter-backend-api.herokuapp.com/peeps",
+      {peep: data},
+      {headers: {
+        "content-type": "application/json",
+        "Authorization": 'Token token=' + this.props.session
+      }
+    })
+    .then(() => this.getPeeps())
+    .catch(() => console.log('error'))
+  }
+
   render() {
-    const isLoaded = this.state.status === 'loaded'
-    const peeps = this.state.peeps.map(peep => <Peep data={peep} key={peep.id}/>)
+    const isLoaded = this.state.status === 'loaded';
     return(
       <div className='peep-timeline'>
-        {isLoaded && peeps}
+        {isLoaded && this.state.peeps.map(peep => <Peep data={peep} key={peep.id}/>)}
       </div>
     );
   };

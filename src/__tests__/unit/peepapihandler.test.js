@@ -5,13 +5,14 @@ import Peep from '../../peep';
 import axios from 'axios';
 import {mockPeeps} from '../../mocks/mockObjects'
 
+let userDetails = {userId: 1}
 jest.mock('axios');
 
 describe('PeepApiHandler', () => {
   let wrapper;
 
   beforeEach(() => {
-    wrapper = shallow(<PeepApiHandler/>, {disableLifecycleMethods: true});
+    wrapper = shallow(<PeepApiHandler userDetails={userDetails} session={"testSession"}/>, {disableLifecycleMethods: true});
   });
 
   describe('getPeeps', () => {
@@ -46,9 +47,24 @@ describe('PeepApiHandler', () => {
     });
   });
 
+  describe('postPeep', () => {
+    it('makes makes post req and calls getPeeps', done => {
+      let postReq = axios.post.mockImplementation(() => Promise.resolve());
+      let spyGetPeeps = jest.spyOn(PeepApiHandler.prototype, 'getPeeps');
+
+      wrapper.instance().postPeep('hello');
+      setTimeout(() => {
+        expect(postReq).toHaveBeenCalled();
+        expect(spyGetPeeps).toHaveBeenCalled();
+        done();
+      });
+    });
+  });
+
   describe('on mount', () => {
     it('calls getPeeps', done => {
       let spyGetPeeps = jest.spyOn(PeepApiHandler.prototype, 'getPeeps');
+
       wrapper = shallow(<PeepApiHandler/>);
       setTimeout(() => {
         expect(spyGetPeeps).toHaveBeenCalled();
