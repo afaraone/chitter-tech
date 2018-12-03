@@ -31,7 +31,16 @@ class PeepApiHandler extends Component {
     })
     .then(() => this.getPeeps())
     .catch(err => this.setState({ status: err}));
-  }
+  };
+
+  putLike(peepId) {
+    axios.put("https://chitter-backend-api.com.herokuapp.com/peeps/" + peepId + '/' + this.props.userDetails.userId,
+      {headers: {
+        "content-type": "application/json",
+        "Authorization": 'Token token=' + this.props.session
+      }
+    });
+  };
 
   render() {
     const isLoggedIn = this.props.loggedIn

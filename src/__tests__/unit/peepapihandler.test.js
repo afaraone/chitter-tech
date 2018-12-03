@@ -72,6 +72,20 @@ describe('PeepApiHandler', () => {
     });
   });
 
+  describe('putLike', () => {
+    it('makes put req and calls getPeeps', done => {
+      let putReq = axios.put.mockImplementation(() => Promise.resolve());
+      let spyGetPeeps = jest.spyOn(PeepApiHandler.prototype, 'getPeeps');
+
+      wrapper.instance().putLike();
+      setTimeout(() => {
+        expect(putReq).toHaveBeenCalled();
+        expect(spyGetPeeps).toHaveBeenCalled();
+        done();
+      });
+    });
+  });
+
   describe('on mount', () => {
     it('calls getPeeps', done => {
       let spyGetPeeps = jest.spyOn(PeepApiHandler.prototype, 'getPeeps');
