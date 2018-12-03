@@ -86,6 +86,20 @@ describe('PeepApiHandler', () => {
     });
   });
 
+  describe('deleteLike', () => {
+    it('makes delete req and calls getPeeps', done => {
+      let deleteReq = axios.delete.mockImplementation(() => Promise.resolve());
+      let spyGetPeeps = jest.spyOn(PeepApiHandler.prototype, 'getPeeps');
+
+      wrapper.instance().deleteLike();
+      setTimeout(() => {
+        expect(deleteReq).toHaveBeenCalled();
+        expect(spyGetPeeps).toHaveBeenCalled();
+        done();
+      });
+    });
+  });
+
   describe('on mount', () => {
     it('calls getPeeps', done => {
       let spyGetPeeps = jest.spyOn(PeepApiHandler.prototype, 'getPeeps');

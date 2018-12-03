@@ -8,7 +8,7 @@ class PeepContainer extends Component {
     return(
       <div className='peep-timeline'>
         {peeps.map(peep => <Peep
-            data={peep} putLike={this.props.putLike} currentUser={currentUser} key={peep.id}
+            data={peep} putLike={this.props.putLike} deleteLike={this.props.deleteLike} currentUser={currentUser} key={peep.id}
           />)}
       </div>
     )
