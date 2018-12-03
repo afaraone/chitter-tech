@@ -6,11 +6,12 @@ class PeepContainer extends Component {
     const peeps = this.props.peeps
     return(
       <div className='peep-timeline'>
-        {peeps.map(peep => <Peep data={peep} key={peep.id}/>)}
+        {peeps.map(peep => <Peep
+            data={peep} putLike={this.props.putLike} key={peep.id}
+          />)}
       </div>
     )
   }
 }
-// this.state.peeps.map(peep => <Peep data={peep} key={peep.id}/>)
 
 export default PeepContainer;

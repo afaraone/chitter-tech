@@ -6,13 +6,13 @@ let peepData = {"id": 3, "body": "my first peep :)", "created_at": "2018-06-23T1
 "updated_at": "2018-06-23T13:21:23.317Z", "user": {"id": 1, "handle": "kay"},
 "likes": [{"user": {"id": 1, "handle": "kay"}}, {"user": {"id": 2, "handle": "james"}}]};
 
-let mockPostLike = jest.fn();
+let mockPutLike = jest.fn();
 
 describe('Peep', () => {
   let wrapper;
 
   beforeEach(() => {
-    wrapper = shallow(<Peep data={peepData} postLike={mockPostLike} key={peepData.id}/>);
+    wrapper = shallow(<Peep data={peepData} putLike={mockPutLike} key={peepData.id}/>);
   });
 
   it('renders user handle', () => {
@@ -37,6 +37,6 @@ describe('Peep', () => {
 
   it('clicking on like button calls postLike callback with post id as cb', () => {
     wrapper.find('.like-button').simulate('click');
-    expect(mockPostLike).toHaveBeenCalledWith(3);
+    expect(mockPutLike).toHaveBeenCalledWith(3);
   });
 });

@@ -8,6 +8,7 @@ class PeepApiHandler extends Component {
     super(props);
     this.state = { peeps: [], status: 'loading' };
     this.postPeep = this.postPeep.bind(this)
+    this.putLike = this.putLike.bind(this)
   };
 
   componentDidMount() {
@@ -48,7 +49,7 @@ class PeepApiHandler extends Component {
     return(
       <>
         {isLoggedIn && <PeepForm postPeep={this.postPeep}/>}
-        {isLoaded && <PeepContainer peeps={this.state.peeps}/>}
+        {isLoaded && <PeepContainer peeps={this.state.peeps} putLike={this.putLike}/>}
       </>
     );
   };
