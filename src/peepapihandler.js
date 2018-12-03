@@ -8,6 +8,8 @@ class PeepApiHandler extends Component {
     super(props);
     this.state = { peeps: [], status: 'loading' };
     this.postPeep = this.postPeep.bind(this)
+    this.putLike = this.putLike.bind(this)
+    this.deleteLike = this.deleteLike.bind(this)
   };
 
   componentDidMount() {
@@ -21,7 +23,7 @@ class PeepApiHandler extends Component {
   };
 
   postPeep(body) {
-    let data = {"user_id": this.props.userDetails.userId, "body": body}
+    let data = {"user_id": this.props.userDetails.id, "body": body}
     axios.post("https://chitter-backend-api.herokuapp.com/peeps",
       {peep: data},
       {headers: {
@@ -31,15 +33,38 @@ class PeepApiHandler extends Component {
     })
     .then(() => this.getPeeps())
     .catch(err => this.setState({ status: err}));
-  }
+  };
+
+  putLike(peepId) {
+    axios.put("https://chitter-backend-api.herokuapp.com/peeps/" + peepId + '/likes/' + this.props.userDetails.id,
+      {},
+      {headers: {
+        "Authorization": 'Token token=' + this.props.session
+      }
+    })
+    .then(() => this.getPeeps())
+  };
+
+  deleteLike(peepId) {
+    axios.delete("https://chitter-backend-api.herokuapp.com/peeps/" + peepId + '/likes/' + this.props.userDetails.id,
+      {headers: {
+        "Authorization": 'Token token=' + this.props.session
+      }
+    })
+    .then(() => this.getPeeps())
+  };
+
 
   render() {
     const isLoggedIn = this.props.loggedIn
+    const currentUser = this.props.userDetails
     const isLoaded = this.state.status === 'loaded';
     return(
       <>
         {isLoggedIn && <PeepForm postPeep={this.postPeep}/>}
-        {isLoaded && <PeepContainer peeps={this.state.peeps}/>}
+        {isLoggedIn && isLoaded && <PeepContainer
+          peeps={this.state.peeps}currentUser={currentUser}
+          putLike={this.putLike} deleteLike={this.deleteLike} />}
       </>
     );
   };

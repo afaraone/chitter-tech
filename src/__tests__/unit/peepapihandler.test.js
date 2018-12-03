@@ -13,7 +13,7 @@ describe('PeepApiHandler', () => {
   let wrapper;
 
   beforeEach(() => {
-    wrapper = shallow(<PeepApiHandler userDetails={userDetails} session={"testSession"}/>, {disableLifecycleMethods: true});
+    wrapper = shallow(<PeepApiHandler userDetails={userDetails} loggedIn={true} session={"testSession"}/>, {disableLifecycleMethods: true});
   });
 
   describe('getPeeps', () => {
@@ -67,6 +67,34 @@ describe('PeepApiHandler', () => {
       wrapper.instance().postPeep('hello');
       setTimeout(() => {
         expect(wrapper.state('status')).toEqual('error');
+        done();
+      });
+    });
+  });
+
+  describe('putLike', () => {
+    it('makes put req and calls getPeeps', done => {
+      let putReq = axios.put.mockImplementation(() => Promise.resolve());
+      let spyGetPeeps = jest.spyOn(PeepApiHandler.prototype, 'getPeeps');
+
+      wrapper.instance().putLike();
+      setTimeout(() => {
+        expect(putReq).toHaveBeenCalled();
+        expect(spyGetPeeps).toHaveBeenCalled();
+        done();
+      });
+    });
+  });
+
+  describe('deleteLike', () => {
+    it('makes delete req and calls getPeeps', done => {
+      let deleteReq = axios.delete.mockImplementation(() => Promise.resolve());
+      let spyGetPeeps = jest.spyOn(PeepApiHandler.prototype, 'getPeeps');
+
+      wrapper.instance().deleteLike();
+      setTimeout(() => {
+        expect(deleteReq).toHaveBeenCalled();
+        expect(spyGetPeeps).toHaveBeenCalled();
         done();
       });
     });
