@@ -10,6 +10,7 @@ class PeepApiHandler extends Component {
     this.postPeep = this.postPeep.bind(this)
     this.putLike = this.putLike.bind(this)
     this.deleteLike = this.deleteLike.bind(this)
+    this.deletePeep = this.deletePeep.bind(this)
   };
 
   componentDidMount() {
@@ -34,6 +35,16 @@ class PeepApiHandler extends Component {
     .then(() => this.getPeeps())
     .catch(err => this.setState({ status: err}));
   };
+
+  deletePeep(peepId) {
+    axios.delete("https://chitter-backend-api.herokuapp.com/peeps/" + peepId,
+      {headers: {
+        "Authorization": 'Token token=' + this.props.session
+      }
+    })
+    .then(() => this.getPeeps())
+  };
+
 
   putLike(peepId) {
     axios.put("https://chitter-backend-api.herokuapp.com/peeps/" + peepId + '/likes/' + this.props.userDetails.id,
@@ -64,6 +75,7 @@ class PeepApiHandler extends Component {
         {isLoggedIn && <PeepForm postPeep={this.postPeep}/>}
         {isLoggedIn && isLoaded && <PeepContainer
           peeps={this.state.peeps}currentUser={currentUser}
+          deletePeep={this.deletePeep}
           putLike={this.putLike} deleteLike={this.deleteLike} />}
       </>
     );
