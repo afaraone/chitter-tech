@@ -13,6 +13,7 @@ let likedPeep = {"id": 3, "body": "my first peep :)", "created_at": "2018-06-23T
 let currentUser = {"id": 2, "handle": "james"}
 
 let mockPutLike = jest.fn();
+let mockDeleteLike = jest.fn();
 
 describe('Peep', () => {
   let wrapper;
@@ -46,9 +47,32 @@ describe('Peep', () => {
       expect(wrapper.find('.like-button').exists()).toEqual(true);
     })
 
+    it('does not render unlike button', () => {
+      expect(wrapper.find('.unlike-button').exists()).toEqual(false);
+    })
+
     it('clicking on like button calls postLike callback with post id as cb', () => {
       wrapper.find('.like-button').simulate('click');
       expect(mockPutLike).toHaveBeenCalledWith(3);
     });
   });
+
+  describe('liked by User', () => {
+    beforeEach(() => {
+      wrapper = shallow(<Peep data={likedPeep} deleteLike={mockDeleteLike} currentUser={currentUser}/>);
+    })
+
+    it('renders unlike button', () => {
+      expect(wrapper.find('.unlike-button').exists()).toEqual(true);
+    })
+
+    it('does not render like button', () => {
+      expect(wrapper.find('.like-button').exists()).toEqual(false);
+    })
+
+    it('clicking on like button calls deleteLike callback with post id as cb', () => {
+      wrapper.find('.unlike-button').simulate('click');
+      expect(mockDeleteLike).toHaveBeenCalledWith(3);
+    });
+  })
 });

@@ -25,6 +25,9 @@ class Peep extends Component {
         {!likedByUser &&
           <button className='like-button' onClick={() => this.props.putLike(id) }>Like</button>
         }
+        {likedByUser &&
+          <button className='unlike-button' onClick={() => this.props.deleteLike(id) }>Unlike</button>
+        }
       </div>
     )
   }
