@@ -34,7 +34,7 @@ describe('UserApiHandler', () => {
 
       wrapper.instance().postSession("testHandle", "testPassword");
       setTimeout(() => {
-        expect(wrapper.state('userDetails')).toEqual({userId: 1, handle: "testHandle"});
+        expect(wrapper.state('userDetails')).toEqual({id: 1, handle: "testHandle"});
         expect(wrapper.state('session')).toEqual('testSession');
         expect(wrapper.state('status')).toEqual('loggedIn');
         done();
@@ -70,7 +70,7 @@ describe('UserApiHandler', () => {
 
       wrapper.instance().postUser("testHandle", "testPassword");
       setTimeout(() => {
-        expect(wrapper.state('userDetails')).toEqual({userId: 1, handle: "testHandle"});
+        expect(wrapper.state('userDetails')).toEqual({id: 1, handle: "testHandle"});
         expect(wrapper.state('session')).toEqual('testSession');
         expect(wrapper.state('status')).toEqual('loggedIn');
         done();

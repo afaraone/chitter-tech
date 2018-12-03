@@ -4,10 +4,11 @@ import Peep from './peep'
 class PeepContainer extends Component {
   render() {
     const peeps = this.props.peeps
+    const currentUser = this.props.currentUser
     return(
       <div className='peep-timeline'>
         {peeps.map(peep => <Peep
-            data={peep} putLike={this.props.putLike} key={peep.id}
+            data={peep} putLike={this.props.putLike} currentUser={currentUser} key={peep.id}
           />)}
       </div>
     )

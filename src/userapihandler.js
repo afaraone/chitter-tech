@@ -28,7 +28,7 @@ class UserApiHandler extends Component {
             headers: {"content-type": "application/json"}
         })
         .then(res => this.setState({
-            userDetails: {userId: res.data.user_id, handle: handle},
+            userDetails: {id: res.data.user_id, handle: handle},
             session: res.data.session_key,
             status: 'loggedIn',
             showButton: true

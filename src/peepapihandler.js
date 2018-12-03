@@ -22,7 +22,7 @@ class PeepApiHandler extends Component {
   };
 
   postPeep(body) {
-    let data = {"user_id": this.props.userDetails.userId, "body": body}
+    let data = {"user_id": this.props.userDetails.id, "body": body}
     axios.post("https://chitter-backend-api.herokuapp.com/peeps",
       {peep: data},
       {headers: {
@@ -35,7 +35,7 @@ class PeepApiHandler extends Component {
   };
 
   putLike(peepId) {
-    axios.put("https://chitter-backend-api.herokuapp.com/peeps/" + peepId + '/likes/' + this.props.userDetails.userId,
+    axios.put("https://chitter-backend-api.herokuapp.com/peeps/" + peepId + '/likes/' + this.props.userDetails.id,
       {},
       {headers: {
         "Authorization": 'Token token=' + this.props.session
@@ -46,11 +46,12 @@ class PeepApiHandler extends Component {
 
   render() {
     const isLoggedIn = this.props.loggedIn
+    const currentUser = this.props.userDetails
     const isLoaded = this.state.status === 'loaded';
     return(
       <>
         {isLoggedIn && <PeepForm postPeep={this.postPeep}/>}
-        {isLoaded && <PeepContainer peeps={this.state.peeps} putLike={this.putLike}/>}
+        {isLoaded && <PeepContainer peeps={this.state.peeps} currentUser={currentUser} putLike={this.putLike}/>}
       </>
     );
   };

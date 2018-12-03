@@ -27,7 +27,7 @@ describe('Users', () => {
   it('users details and session saved after logging in', done => {
     wrapper.find('#login-submit').simulate('click');
     setTimeout(() => {
-      expect(wrapper.state('userDetails')).toEqual({userId: 1, handle: "handle"});
+      expect(wrapper.state('userDetails')).toEqual({id: 1, handle: "handle"});
       expect(wrapper.state('session')).toEqual('testSession');
       expect(wrapper.state('status')).toEqual('loggedIn');
       done();
@@ -37,7 +37,7 @@ describe('Users', () => {
   it('user details and session saved after registration', done => {
     wrapper.find('#register-submit').simulate('click');
     setTimeout(() => {
-      expect(wrapper.state('userDetails')).toEqual({userId: 1, handle: "handle"});
+      expect(wrapper.state('userDetails')).toEqual({id: 1, handle: "handle"});
       expect(wrapper.state('session')).toEqual('testSession');
       expect(wrapper.state('status')).toEqual('loggedIn');
       done();
