@@ -14,7 +14,7 @@ This project is a showcase of my understanding of React, Jest and Enzyme. I have
  - [x] Posting Peeps (i.e. tweets)
  - [x] Viewing all Peeps (I suggest you start here)
  - [x] Deleting Peeps
- - [x]Liking Peeps
+ - [x] Liking Peeps
  - [x] Unliking Peeps
 
 ## Installation
