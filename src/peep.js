@@ -36,7 +36,7 @@ class Peep extends Component {
           <button className='unlike-button' onClick={() => this.props.deleteLike(id) }>Unlike</button>
         }
         {writtenByUser &&
-          <button className='delete-button' onClick={() => this.props.deletePeep(id) }>Unlike</button>
+          <button className='delete-button' onClick={() => this.props.deletePeep(id) }>Delete</button>
         }
       </div>
     )
