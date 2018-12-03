@@ -15,12 +15,13 @@ let notAuthor = {"id": 1, "handle": "kay"}
 
 let mockPutLike = jest.fn();
 let mockDeleteLike = jest.fn();
+let mockDeletePeep = jest.fn();
 
 describe('Peep', () => {
   let wrapper;
 
   beforeEach(() => {
-    wrapper = shallow(<Peep data={unlikedPeep} currentUser={currentUser} putLike={mockPutLike} key={unlikedPeep.id}/>);
+    wrapper = shallow(<Peep data={unlikedPeep} currentUser={currentUser} deletePeep={mockDeletePeep} putLike={mockPutLike} key={unlikedPeep.id}/>);
   });
 
   it('renders user handle', () => {
@@ -47,6 +48,11 @@ describe('Peep', () => {
     it('renders delete button', () => {
       expect(wrapper.find('.delete-button').exists()).toEqual(true)
     })
+
+    it('clicking on delete button calls deletePeep callback with post id as cb', () => {
+      wrapper.find('.delete-button').simulate('click');
+      expect(mockDeletePeep).toHaveBeenCalledWith(3);
+    });
   });
 
   describe('not created by User', () => {
