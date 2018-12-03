@@ -62,7 +62,7 @@ class PeepApiHandler extends Component {
     return(
       <>
         {isLoggedIn && <PeepForm postPeep={this.postPeep}/>}
-        {isLoaded && <PeepContainer
+        {isLoggedIn && isLoaded && <PeepContainer
           peeps={this.state.peeps}currentUser={currentUser}
           putLike={this.putLike} deleteLike={this.deleteLike} />}
       </>

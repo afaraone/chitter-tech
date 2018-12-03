@@ -13,7 +13,7 @@ describe('PeepApiHandler', () => {
   let wrapper;
 
   beforeEach(() => {
-    wrapper = shallow(<PeepApiHandler userDetails={userDetails} session={"testSession"}/>, {disableLifecycleMethods: true});
+    wrapper = shallow(<PeepApiHandler userDetails={userDetails} loggedIn={true} session={"testSession"}/>, {disableLifecycleMethods: true});
   });
 
   describe('getPeeps', () => {
