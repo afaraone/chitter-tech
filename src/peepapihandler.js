@@ -35,12 +35,13 @@ class PeepApiHandler extends Component {
   };
 
   putLike(peepId) {
-    axios.put("https://chitter-backend-api.com.herokuapp.com/peeps/" + peepId + '/' + this.props.userDetails.userId,
+    axios.put("https://chitter-backend-api.herokuapp.com/peeps/" + peepId + '/likes/' + this.props.userDetails.userId,
+      {},
       {headers: {
-        "content-type": "application/json",
         "Authorization": 'Token token=' + this.props.session
       }
-    });
+    })
+    .then(() => this.getPeeps())
   };
 
   render() {
