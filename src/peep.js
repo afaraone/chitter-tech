@@ -12,10 +12,17 @@ class Peep extends Component {
     return likes.some(like => like.user.id === currentUser.id)
   }
 
+  writtenByUser() {
+    let currentUser = this.props.currentUser
+    let author = this.props.data.user
+    return author.id === currentUser.id
+  }
+
   render() {
     const {body, id, created_at, user, likes } = this.props.data
     const date = this.format_date(created_at)
     const likedByUser = this.likedByUser()
+    const writtenByUser = this.writtenByUser()
     return(
       <div>
         <h2 className='peep-handle'>{user.handle}</h2>
@@ -27,6 +34,9 @@ class Peep extends Component {
         }
         {likedByUser &&
           <button className='unlike-button' onClick={() => this.props.deleteLike(id) }>Unlike</button>
+        }
+        {writtenByUser &&
+          <button className='delete-button' onClick={() => this.props.deletePeep(id) }>Unlike</button>
         }
       </div>
     )

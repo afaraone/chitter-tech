@@ -3,14 +3,15 @@ import { shallow, mount } from 'enzyme';
 import Peep from '../../peep'
 
 let unlikedPeep = {"id": 3, "body": "my first peep :)", "created_at": "2018-06-23T13:21:23.317Z",
-"updated_at": "2018-06-23T13:21:23.317Z", "user": {"id": 1, "handle": "kay"},
+"updated_at": "2018-06-23T13:21:23.317Z", "user": {"id": 2, "handle": "james"},
 "likes": [{"user": {"id": 1, "handle": "kay"}}]};
 
 let likedPeep = {"id": 3, "body": "my first peep :)", "created_at": "2018-06-23T13:21:23.317Z",
-"updated_at": "2018-06-23T13:21:23.317Z", "user": {"id": 1, "handle": "kay"},
+"updated_at": "2018-06-23T13:21:23.317Z", "user": {"id": 2, "handle": "james"},
 "likes": [{"user": {"id": 1, "handle": "kay"}}, {"user": {"id": 2, "handle": "james"}}]};
 
 let currentUser = {"id": 2, "handle": "james"}
+let notAuthor = {"id": 1, "handle": "kay"}
 
 let mockPutLike = jest.fn();
 let mockDeleteLike = jest.fn();
@@ -23,7 +24,7 @@ describe('Peep', () => {
   });
 
   it('renders user handle', () => {
-    let handle = <h2 className='peep-handle'>kay</h2>;
+    let handle = <h2 className='peep-handle'>james</h2>;
     expect(wrapper.containsMatchingElement(handle)).toEqual(true);
   });
 
@@ -41,6 +42,19 @@ describe('Peep', () => {
     let likes = <h2 className='peep-likes'>1 Likes</h2>
     expect(wrapper.contains(likes)).toEqual(true);
   });
+
+  describe('created by User', () => {
+    it('renders delete button', () => {
+      expect(wrapper.find('.delete-button').exists()).toEqual(true)
+    })
+  });
+
+  describe('not created by User', () => {
+    it('does not render delete button', () => {
+      wrapper = shallow(<Peep data={unlikedPeep} currentUser={notAuthor}/>);
+      expect(wrapper.find('.delete-button').exists()).toEqual(false)
+    })
+  })
 
   describe('not liked by User', () => {
     it('renders like button', () => {
