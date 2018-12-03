@@ -9,14 +9,13 @@ This is a Front-End SPA Twitter clone for an existing backend CRUD API located [
 This project is a showcase of my understanding of React, Jest and Enzyme. I have used TDD throughout the project.
 
 ## Features
-[x] Creating Users
-[x] Logging in
-[x] Posting Peeps (i.e. tweets)
-[x] Viewing all Peeps (I suggest you start here)
-[ ] Viewing individual Peeps
-[ ] Deleting Peeps
-[ ]Liking Peeps
-[ ] Unliking Peeps
+ - [x] Creating Users
+ - [x] Logging in
+ - [x] Posting Peeps (i.e. tweets)
+ - [x] Viewing all Peeps (I suggest you start here)
+ - [x] Deleting Peeps
+ - [x]Liking Peeps
+ - [x] Unliking Peeps
 
 ## Installation
 `npm install` to install dependencies.
