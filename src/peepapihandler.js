@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import PeepContainer from './peepcontainer';
 import PeepForm from './peepform';
+import { peepsPath, peepIdPath, peepLikePath } from './axiosConfig'
 import axios from 'axios';
 
 class PeepApiHandler extends Component {
@@ -18,14 +19,14 @@ class PeepApiHandler extends Component {
   };
 
   getPeeps() {
-    axios.get("https://chitter-backend-api.herokuapp.com/peeps")
+    axios.get(peepsPath)
     .then(res => this.setState({peeps: res.data, status: 'loaded' }))
     .catch(err => this.setState({ status: err}));
   };
 
   postPeep(body) {
     let data = {"user_id": this.props.userDetails.id, "body": body}
-    axios.post("https://chitter-backend-api.herokuapp.com/peeps",
+    axios.post(peepsPath,
       {peep: data},
       {headers: {
         "content-type": "application/json",
@@ -37,7 +38,7 @@ class PeepApiHandler extends Component {
   };
 
   deletePeep(peepId) {
-    axios.delete("https://chitter-backend-api.herokuapp.com/peeps/" + peepId,
+    axios.delete(peepIdPath(peepId),
       {headers: {
         "Authorization": 'Token token=' + this.props.session
       }
@@ -47,7 +48,7 @@ class PeepApiHandler extends Component {
 
 
   putLike(peepId) {
-    axios.put("https://chitter-backend-api.herokuapp.com/peeps/" + peepId + '/likes/' + this.props.userDetails.id,
+    axios.put(peepLikePath(peepId, this.props.userDetails.id),
       {},
       {headers: {
         "Authorization": 'Token token=' + this.props.session
@@ -57,7 +58,7 @@ class PeepApiHandler extends Component {
   };
 
   deleteLike(peepId) {
-    axios.delete("https://chitter-backend-api.herokuapp.com/peeps/" + peepId + '/likes/' + this.props.userDetails.id,
+    axios.delete(peepLikePath(peepId, this.props.userDetails.id),
       {headers: {
         "Authorization": 'Token token=' + this.props.session
       }

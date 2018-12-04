@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import LoginForm from './loginform';
 import PeepApiHandler from './peepapihandler';
+import { sessionPath, userPath } from './axiosConfig';
 import axios from 'axios';
 
 class UserApiHandler extends Component {
@@ -23,7 +24,7 @@ class UserApiHandler extends Component {
     };
 
     postSession(handle, password) {
-        axios.post('https://chitter-backend-api.herokuapp.com/sessions', {
+        axios.post(sessionPath, {
             session: {handle: handle, password: password},
             headers: {"content-type": "application/json"}
         })
@@ -46,7 +47,7 @@ class UserApiHandler extends Component {
     };
 
     postUser(handle, password) {
-        axios.post('https://chitter-backend-api.herokuapp.com/users', {
+        axios.post(userPath, {
             headers: {"content-type": "application/json"},
             user: {handle: handle, password: password}
         })
