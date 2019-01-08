@@ -1,32 +1,103 @@
 .App {
   text-align: center;
 }
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
+body {
+  background-color: #ccccff;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+#title {
+  font-size: 400%;
+  font-style: italic;
+  text-align: center;
+  margin-left: 5px;
+}
+
+#login-button, #login-submit, #register-submit, #logout-button {
+  border: none;
+  background-color: #6600ff;
+  font-size: 120%;
   color: white;
+  margin-left: 5px;
 }
 
-.App-link {
-  color: #61dafb;
+.like-button, .delete-button, .unlike-button {
+  border: none;
+  color: white;
+  font-size: 150%;
+  background-color: #3399ff;
+  margin-bottom: 10px;
+  margin-left: 5px;
+  margin-right: 5px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.login-form-container {
+  height: 20px;
+  font-size: 120%;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+.login-form {
+  height: inherit;
+  border: none;
+}
+
+.post-peep-container {
+  height: 30px;
+  font-size: 120%;
+  margin-left: 10px;
+  font-size: 120%;
+  border: none;
+}
+
+#post-peep {
+  background-color: #3399ff;
+  height: inherit;
+  color: white;
+  font-weight: bold;
+}
+
+#peep-textbox {
+  height: inherit;
+}
+
+.peep-timeline {
+  display: flex;
+  padding: 10px;
+  flex-flow: wrap;
+}
+
+.peep-box {
+  background-color: #99ccff;
+  align-items: center;
+  border-style: solid;
+  border-width: 5px;
+  margin: 5px;
+  max-width: 50%;
+}
+
+h2 {
+  text-align: justify;
+  font-family:cursive;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.peep-handle, .peep-date, .peep-likes {
+  font-style: italic;
+  font-size: 130%;
+  margin-right: 5px;
+}
+
+.peep-body {
+  font-weight: bold;
+}
+
+.peep-date, .peep-likes {
+  color: #56585b;
+}
+
+.peep-handle {
+  text-decoration: underline;
 }

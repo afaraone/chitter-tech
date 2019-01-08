@@ -24,8 +24,8 @@ class LoginForm extends Component {
 		let {handle, password} = this.state;
 		return (
 			<div className='login-form-container'>
-			<input type='text' className='login-form' id='login-handle' onChange={this.updateHandle}/>
-			<input type='text' className='login-form' id='login-password' onChange={this.updatePassword}/>
+			<input type='text' className='login-form' placeholder='Handle' id='login-handle' onChange={this.updateHandle}/>
+			<input type='text' className='login-form' placeholder='Password' id='login-password' onChange={this.updatePassword}/>
 			<button id='login-submit' onClick={() => this.props.postSession(handle, password)}>Login</button>
 			<button id='register-submit' onClick={() => this.props.postUser(handle, password)}>Register</button>
 			</div>

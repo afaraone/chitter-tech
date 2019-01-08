@@ -5,7 +5,10 @@ import UserApiHandler from './userapihandler';
 
 class App extends Component {
   render() {
-    return (<UserApiHandler />);
+    return (<>
+              <h1 id='title'>Chitter</h1>
+              <UserApiHandler />
+            </>);
   };
 };
 

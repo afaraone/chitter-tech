@@ -24,7 +24,7 @@ class Peep extends Component {
     const likedByUser = this.likedByUser()
     const writtenByUser = this.writtenByUser()
     return(
-      <div>
+      <div className='peep-box'>
         <h2 className='peep-handle'>{user.handle}</h2>
         <h2 className='peep-body'>{body}</h2>
         <h2 className='peep-date'>{date}</h2>

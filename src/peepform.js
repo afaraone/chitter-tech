@@ -16,8 +16,8 @@ class PeepForm extends Component {
   render() {
     const body = this.state.body
     return(
-      <div className='login-form-container'>
-      <input type='text' id='peep-textbox' onChange={this.updateBody}/>
+      <div className='post-peep-container'>
+      <input type='text' id='peep-textbox' placeholder='Type Message' onChange={this.updateBody}/>
       <button id='post-peep' onClick={() => this.props.postPeep(body)}>Post</button>
       </div>
     )
